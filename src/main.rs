@@ -6,7 +6,7 @@ use crate::lib::types::{Ant, Grid};
 
 fn main() {
     let (mut canvas, mut events) = lib::init(700, 700);     // Crear la ventana
-    let mut ant = Ant::new((35, 35), 1);    // Crear una nueva hormiga
+    let mut ant = Ant::new((35, 35), 3);    // Crear una nueva hormiga
     let (rows, columns) = (70, 70);     // La cantidad de filas y columnas en el tablero
     let mut grid = Grid::new(rows, columns);    // El tablero
     let cell_width = 10;    // El tamaño de cada selda
@@ -37,7 +37,7 @@ fn main() {
             }
         }
 
-        // thread::sleep(time::Duration::from_secs(1));
+        // thread::sleep(time::Duration::from_secs(2));
         lib::display_frame(&mut canvas, &grid, &ant, &columns, &rows, &cell_width);
     }
 }

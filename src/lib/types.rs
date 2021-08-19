@@ -20,7 +20,7 @@ impl Ant {
         // If the state of the box is 0 the ant will move 90° to the left.
         let rotate = if box_state == 1 { -1 } else { 1 };
         // Chage ant's direction
-        self.direction = (self.direction + rotate) % 4;
+        self.direction = (self.direction + rotate).rem_euclid(4);
 
         // update the ant's position based on its direction
         // 0 = North
