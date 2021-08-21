@@ -4,14 +4,14 @@ pub mod lib;
 use crate::lib::types::{Ant, Grid};
 
 fn main() {
-    let (mut canvas, mut events) = lib::init(700, 700); // Crear la ventana
-    let mut ant = Ant::new((35, 35), 3); // Crear una nueva hormiga
-    let (rows, columns) = (70, 70); // La cantidad de filas y columnas en el tablero
-    let mut grid = Grid::new(rows, columns); // El tablero
-    let cell_width = 10; // El tamaño de cada selda
+    let (mut canvas, mut events) = lib::init(700, 700); // Create a window
+    let mut ant = Ant::new((35, 35), 3); // Create an instance of an ant
+    let (rows, columns) = (70, 70); // The number of rows and columns on the board
+    let mut grid = Grid::new(rows, columns); // The board
+    let cell_width = 10; // The size in pixels of each cell
 
     'game: loop {
-        // Si se aprieta escape, se cierra la ventana
+        // If escape is pressed, the window closes
         for event in events.poll_iter() {
             match event {
                 Event::Quit { .. }
@@ -22,8 +22,10 @@ fn main() {
                 _ => continue 'game,
             }
         }
+        // get current ant position
         let (y, x) = ant.position;
 
+        // if the ant leaves the board stop the game
         if (y >= rows || x >= columns) || (y == 0 || x == 0) {
             continue 'game;
         } else {
@@ -36,6 +38,7 @@ fn main() {
             }
         }
 
+        // show the board in the window
         lib::display_frame(&mut canvas, &grid, &ant, &columns, &rows, &cell_width);
     }
 }

@@ -8,7 +8,7 @@ pub struct Ant {
 }
 
 impl Ant {
-    pub fn new(position: (u32, u32), direction: i8) -> Ant {
+    pub fn new(position: (u32, u32), direction: i8) -> Self {
         Ant {
             position,
             direction,
@@ -39,7 +39,7 @@ impl Ant {
 }
 
 impl Grid {
-    pub fn new(rows: u32, columns: u32) -> Grid {
+    pub fn new(rows: u32, columns: u32) -> Self {
         let mut grid_vector = Vec::new();
 
         for row in 0..rows {

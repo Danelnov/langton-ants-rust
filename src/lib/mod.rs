@@ -6,7 +6,7 @@ use sdl2::EventPump;
 pub mod types;
 use types::{Grid, Ant};
 
-// Iniciar la ventana
+/// Create a new window
 pub fn init(width: u32, height: u32) -> (Canvas<Window>, EventPump) {
     let sdl_context = sdl2::init().unwrap();
     let video_subsystem = sdl_context.video().unwrap();
@@ -26,7 +26,7 @@ pub fn init(width: u32, height: u32) -> (Canvas<Window>, EventPump) {
     (canvas, event_pump)
 }
 
-// Dibujar cada cuadro en la ventana
+/// Draw a cell at a specific position
 pub fn display_cell(
     renderer: &mut Canvas<Window>,
     row: u32,
@@ -42,6 +42,9 @@ pub fn display_cell(
     let x = cell_width * col;
     let y = cell_width * row;
 
+    // if the cell is equal to the ant's position, the cell will be red
+    // if the cell has a value of 1, it will be painted white
+    // if it has a value of 0 it will be painted black
     let drawing_color = if (row, col) == ant_data.position {
         Color::RGB(255, 0, 0)
     } else {
@@ -53,6 +56,7 @@ pub fn display_cell(
         }
     };
 
+    // draw the picture
     renderer.set_draw_color(drawing_color);
     let square = renderer.fill_rect(Rect::new(x as i32, y as i32, *cell_width, *cell_height));
     match square {
@@ -61,6 +65,7 @@ pub fn display_cell(
     }
 }
 
+/// Draw all cells in the window
 pub fn display_frame(
     renderer: &mut Canvas<Window>,
     grid: &Grid,
